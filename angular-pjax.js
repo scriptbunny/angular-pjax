@@ -28,23 +28,25 @@
       scope:true,
       controller: ['$rootScope', '$scope', '$window', '$timeout', '$compile', '$element', function($rootScope, $scope, $window, $timeout, $compile, $element) {
         var contentScope = $scope,
-            parentScope = $scope.$parent;;
+            parentScope = $scope.$parent;
 
         var updateCurrentPath = function() {
           $rootScope.currentPath = $window.location.pathname;
         };
 
+        var $document = $($window.document);
+
         $element.attr('data-pjax-container', true);
 
-        $(document).pjax('a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])', pjaxOptions);
+        $document.pjax('a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])', pjaxOptions);
 
-        $(document).on('pjax:start', function() {
+        $document.on('pjax:start', function() {
           $timeout(function() {
             $rootScope.contentLoading = true;
           });
         });
 
-        $(document).on('pjax:beforeReplace', function() {
+        $document.on('pjax:beforeReplace', function() {
           $timeout(function() {
             if (contentScope) {
               contentScope.$destroy();
@@ -52,7 +54,7 @@
           });
         });
 
-        $(document).on('pjax:end', function() {
+        $document.on('pjax:end', function() {
           $timeout(function() {
             updateCurrentPath();
 

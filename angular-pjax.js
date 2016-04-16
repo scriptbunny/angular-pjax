@@ -1,6 +1,6 @@
 (function() {
 
-  var angularPJAXModule = angular.module('ngPJAX', []);
+  var angularPJAXModule = angular.module('xPJAX', []);
 
   var pjaxOptions = {
     container: '[data-pjax-container]'

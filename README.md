@@ -6,7 +6,7 @@ Here is a basic setup with a Rails backend:
 
 In your JavaScript:
 ```javascript
-var myApp = angular.module('myApp', ['ngPJAX']);
+var myApp = angular.module('myApp', ['xPJAX']);
 ```
 
 In your application layout:

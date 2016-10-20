@@ -3,7 +3,8 @@
   var module = angular.module('xPJAX', []);
 
   var defaults = {
-    links: 'a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])'
+    links: 'a:not([data-remote]):not([data-behavior]):not([data-skip-pjax])',
+    popstate: true
   };
 
   var configs = [];
@@ -104,6 +105,16 @@
 
             $element.attr('data-pjax-container', true);
             $document.pjax(config.links, config);
+
+            $element.on('pjax:popstate', function(e) {
+              if (!config.container.is(e.target)) {
+                return;
+              }
+
+              if (!config.popstate) {
+                $window.location.href = e.state.url;
+              }
+            });
 
             $element.on('pjax:start', function(e) {
               if (!config.container.is(e.target)) {

@@ -112,7 +112,8 @@
               }
 
               if (!config.popstate) {
-                $window.location.href = e.state.url;
+                window.history.replaceState(null, "", e.state.url)
+                window.location.replace(e.state.url)
               }
             });
 
